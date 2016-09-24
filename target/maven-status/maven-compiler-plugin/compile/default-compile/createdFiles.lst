@@ -1,0 +1,11 @@
+wad\config\SecurityConfiguration$AuthenticationConfiguration.class
+com\mycompany\doctorapp\auth\JpaAuthenticationProvider$2.class
+com\mycompany\doctorapp\auth\JpaAuthenticationProvider$1.class
+com\mycompany\doctorapp\auth\JpaAuthenticationProvider.class
+com\mycompany\doctorapp\domain\Person.class
+DefaultController.class
+com\mycompany\doctorapp\domain\Sickness.class
+wad\DoctorApp.class
+wad\config\SecurityConfiguration.class
+com\mycompany\doctorapp\repository\PersonRepository.class
+com\mycompany\doctorapp\domain\Doctor.class
