@@ -1,22 +1,49 @@
 package com.mycompany.doctorapp.domain;
 
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
-public class Sickness {
-private List<String> oireet;
+@Entity
+public class Sickness extends AbstractPersistable<Long>{
 private String nimi;
-private String hoitoOhje;
+private String treatment;
+@ManyToOne
+private Doctor doctor;
 
-    public List<String> getOireet() {
-        return oireet;
-    }
+@ManyToOne
+private Patient patient;
 
-    public void setOireet(List<String> oireet) {
-        this.oireet = oireet;
-    }
+
+
 
     public String getNimi() {
         return nimi;
+    }
+
+    public String getTreatment() {
+        return treatment;
+    }
+
+    public void setTreatment(String treatment) {
+        this.treatment = treatment;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public void setNimi(String nimi) {
@@ -24,11 +51,11 @@ private String hoitoOhje;
     }
 
     public String getHoitoOhje() {
-        return hoitoOhje;
+        return treatment;
     }
 
-    public void setHoitoOhje(String hoitoOhje) {
-        this.hoitoOhje = hoitoOhje;
+    public void setHoitoOhje(String treatment) {
+        this.treatment = treatment;
     }
 
 }

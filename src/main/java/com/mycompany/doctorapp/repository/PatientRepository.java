@@ -5,14 +5,14 @@
  */
 package com.mycompany.doctorapp.repository;
 
-import com.mycompany.doctorapp.domain.Person;
+import com.mycompany.doctorapp.domain.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author null
  */
-public interface PersonRepository extends JpaRepository<Person, Long> {
-    Person findByUsername(String username);
+public interface PatientRepository extends JpaRepository<Patient, Long> {
+    Patient findByUsername(String username);
     
 }
