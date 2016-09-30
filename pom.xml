@@ -19,7 +19,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.roufid.tutorials.AppTest</mainClass>
+                            <mainClass>com.mycompany.doctorapp.DoctorApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
