@@ -19,7 +19,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.mycompany.doctorapp.DoctorApp</mainClass>
+                            <mainClass>com.mycompany.doctorapp.main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
