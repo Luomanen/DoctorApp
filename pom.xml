@@ -19,7 +19,6 @@
                 <configuration>
                     <archive>
                         <manifest>
-                             <addClasspath>true</addClasspath>
                             <mainClass>com.mycompany.doctorapp.DoctorApp</mainClass>
                         </manifest>
                     </archive>
