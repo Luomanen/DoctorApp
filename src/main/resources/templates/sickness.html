@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <h3>Sickness</h3>
+        Symptoms: <span th:text="${sickness.symptoms}"/><br/>
+        Patient name: <span th:text="${sickness.patient.name}"/><br/>
+        Doctor  name: <span th:text="${sickness.doctor.name}"/><br/>
+        <div th:if="${sickness.treatmentStatus}">
+            Ordered treatment: <span th:text="${sickness.treatment.content}"/>
+        </div>
+
+
+        <div sec:authorize="hasAuthority('DOCTOR')" th:unless="${sickness.treatmentStatus}">
+            <form action="#" th:action="@{/sickness/{id}(id=${sickness.id})}" method ="POST">
+                <br/><br/> order a treatment:<br/>
+                <input type="text" name="content"/>
+                <input type="submit" value="Submit" />
+            </form> 
+        </div>
+        
+        <br/>
+        <br/>
+        <a th:href="@{/index}"> return to index</a>
+        <br/>
+        <br/>
+        <a th:href="@{/logout}"> logout </a>
+    </body>
+
+
+</html>

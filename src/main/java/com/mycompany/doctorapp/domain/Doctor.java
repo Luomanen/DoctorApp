@@ -1,5 +1,6 @@
 package com.mycompany.doctorapp.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -13,10 +14,10 @@ public class Doctor extends Person {
     private List<Patient> patients;
     
     @OneToMany(mappedBy="")
-    private List<Sickness> treatedSciknesses;
+    private List<Sickness> treatedSicknesses;
     
     @OneToMany
-    private List<Report> writtenReports;
+    private List<Treatment> writtenReports;
 
     public List<Patient> getPatients() {
         return patients;
@@ -26,23 +27,26 @@ public class Doctor extends Person {
         this.patients = patients;
     }
 
-    public List<Sickness> getTreatedSciknesses() {
-        return treatedSciknesses;
+    public List<Sickness> getTreatedSicknesses() {
+        return treatedSicknesses;
     }
 
-    public void setTreatedSciknesses(List<Sickness> treatedSciknesses) {
-        this.treatedSciknesses = treatedSciknesses;
+    public void setTreatedSicknesses(List<Sickness> treatedSicknesses) {
+        this.treatedSicknesses = treatedSicknesses;
     }
 
-    public List<Report> getWrittenReports() {
+    public List<Treatment> getWrittenReports() {
         return writtenReports;
     }
 
-    public void setWrittenReports(List<Report> writtenReports) {
+    public void setWrittenReports(List<Treatment> writtenReports) {
         this.writtenReports = writtenReports;
     }
     
     public void addPatient(Patient patient){
-        this.patients.add(patient);
+        if(this.patients.isEmpty()){
+            patients = new ArrayList<>();
+        }
+        patients.add(patient);
     }
 }

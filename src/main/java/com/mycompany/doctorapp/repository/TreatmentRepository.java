@@ -5,7 +5,7 @@
  */
 package com.mycompany.doctorapp.repository;
 
-import com.mycompany.doctorapp.domain.Report;
+import com.mycompany.doctorapp.domain.Treatment;
 import java.io.Serializable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,6 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Juhana
  */
-public interface ReportRepository extends JpaRepository<Report, Long>{
+public interface TreatmentRepository extends JpaRepository<Treatment, Long>{
     
 }
