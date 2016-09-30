@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Index page</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+
+
+
+
+        <h3>Welcome
+            <span th:text="${user.name}"></span>
+            !
+            <br/>
+
+
+        </h3>
+        <div sec:authorize="hasAuthority('USER')">Your personal doctor is: <span th:text="${user.ownDoctor.name}" sec:authorize="hasAuthority('USER')"/> <br/>
+
+            <p>Report a new sickness:</p>
+
+
+
+
+            <form action ="#" th:action="@{/sickness}" th:object="${sickness}" method = "POST">
+                <table>
+                    <tr>
+                        <td>Name: </td>
+                        <td><input type="text" th:name="symptoms" required="required" /></td>
+                    </tr>
+                    <td><button type="submit" value="submit">Submit</button></td>
+         
+                </table>
+            </form>
+
+
+            <p>past sicknesses:</p>
+            <ul th:each="sickness: ${sicknesses}">
+                <li th:text ="${sickness.symptoms}">sickness name</li>
+
+                <div th:unless="${sickness.treatmentStatus}"> <ul>Treatment status:  Pending</ul></div>
+                <div th:if="${sickness.treatmentStatus}"> <ul>Treatment status:  Treatment available
+                        <a th:href="@{/sickness/{id} (id=${sickness.id})}"> Show me!</a>
+                    </ul></div>
+            </ul>
+
+        </div>
+
+        <div sec:authorize="hasAuthority('DOCTOR')">
+            <p>I am a doctor!</p>
+            <ul th:each="sickness: ${sicknesses}">
+                <li th:text ="${sickness.symptoms}">sickness name, patient:
+                    <span text="${sickness.patient.name}"/>
+                </li>
+
+                <div th:unless="${sickness.treatmentStatus}">
+                    <ul>Treatment status:  Pending</ul>
+                    <ul>
+                        <a th:href="@{/sickness/{id} (id=${sickness.id})}"> Treat now!</a>
+                    </ul>
+                </div>
+                <div th:if="${sickness.treatmentStatus}"> <ul>Treatment status: Treated
+                        <a th:href="@{/sickness/{id} (id=${sickness.id})}"> Show</a></ul></div>
+            </ul>
+
+        </div>
+
+        <br/>
+        <br/>
+        <a th:href="@{/logout}"> logout </a>
+
+    </body>
+</html>

@@ -17,42 +17,50 @@ import com.mycompany.doctorapp.repository.PatientRepository;
 
 @Component
 public class JpaAuthenticationProvider implements AuthenticationProvider {
-    
+
     @Autowired
-    private PatientRepository personRepository;
-    
-    @Autowired    
+    private PatientRepository patientRepository;
+
+    @Autowired
     private DoctorRepository doctorRepository;
-    
+
     @Override
     public Authentication authenticate(Authentication a) throws AuthenticationException {
         String username = a.getPrincipal().toString();
         String password = a.getCredentials().toString();
-        
-        Person person = personRepository.findByUsername(username);
-        
+        boolean isDoc = false;
+        Person person = patientRepository.findByUsername(username);
+
         if (person == null) {
             person = doctorRepository.findByUsername(username);
+            isDoc = true;
             if (person == null) {
                 throw new AuthenticationException("Unable to authenticate user " + username) {
                 };
             }
+
         }
-        
+
         if (!BCrypt.hashpw(password, person.getSalt()).equals(person.getPassword())) {
             throw new AuthenticationException("Unable to authenticate user " + username) {
             };
         }
-        
+
+        //if not doctor, aka is a patient
+        if (!isDoc) {
+            List<GrantedAuthority> grantedAuths = new ArrayList<>();
+            grantedAuths.add(new SimpleGrantedAuthority("USER"));
+            return new UsernamePasswordAuthenticationToken(person.getUsername(), password, grantedAuths);
+        }
+        //is doctor
         List<GrantedAuthority> grantedAuths = new ArrayList<>();
-        grantedAuths.add(new SimpleGrantedAuthority("USER"));
-        
+        grantedAuths.add(new SimpleGrantedAuthority("DOCTOR"));
         return new UsernamePasswordAuthenticationToken(person.getUsername(), password, grantedAuths);
     }
-    
+
     @Override
     public boolean supports(Class<?> type) {
         return true;
     }
-    
+
 }

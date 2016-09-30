@@ -25,11 +25,7 @@ public class SignupController {
     private PatientService patientService; 
     
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String signup(@Valid @ModelAttribute Patient patient) {
-        System.out.println(patient.getUsername());
-        System.out.println(patient.getName());
-        System.out.println(patient.getPassword());
-        
+    public String signup(@Valid @ModelAttribute Patient patient) {        
         patientService.newPatient(patient);
         return "redirect:/login";
     }

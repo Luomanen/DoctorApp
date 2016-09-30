@@ -1,13 +1,12 @@
 package com.mycompany.doctorapp.controller;
 
-import com.mycompany.doctorapp.domain.Person;
-import javax.validation.Valid;
+import com.mycompany.doctorapp.domain.Doctor;
+import com.mycompany.doctorapp.domain.Patient;
+import com.mycompany.doctorapp.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import com.mycompany.doctorapp.repository.PatientRepository;
 import com.mycompany.doctorapp.services.PatientService;
 import org.springframework.security.core.Authentication;
@@ -22,10 +21,30 @@ public class DefaultController {
     @Autowired
     private PatientService patientService;
 
+    @Autowired
+    private DoctorRepository doctorRepository;
+
     @RequestMapping("*")
     public String view(Model model) {
         String authName = SecurityContextHolder.getContext().getAuthentication().getName();
-        model.addAttribute("username",authName);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+        Patient authpatient = patientRepository.findByUsername(username);
+      
+
+        if (authpatient != null) { //if authenticated person is a patient
+            model.addAttribute("sicknesses", authpatient.getSickness());
+            model.addAttribute("user", authpatient);
+        }
+
+        Doctor authdoctor = doctorRepository.findByUsername(username);
+        if (authdoctor != null) { // if authenticated person is a doctor
+            model.addAttribute("sicknesses", authdoctor.getTreatedSicknesses());
+            model.addAttribute("user", authdoctor);
+        }
+
         return "index";
     }
 
@@ -38,7 +57,5 @@ public class DefaultController {
     public String viewSignup() {
         return "signup";
     }
-
-
 
 }
