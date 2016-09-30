@@ -45,7 +45,7 @@ public class SicknessController {
     private TreatmentService treatmentService;
 
     @RequestMapping(value = "/sickness", method = RequestMethod.POST)
-    public String newSickness(@Valid @ModelAttribute Sickness sickness, BindingResult bindingresult) {
+    public String newSickness(@Valid @ModelAttribute("sicknes") Sickness sickness, BindingResult bindingresult) {
         if (bindingresult.hasErrors()) {
             return "redirect:/index";
         }

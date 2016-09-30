@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Index page</title>
         <meta charset="UTF-8"/>
@@ -26,13 +26,19 @@ and open the template in the editor.
         <div sec:authorize="hasAuthority('USER')">Your personal doctor is: <span th:text="${user.ownDoctor.name}" sec:authorize="hasAuthority('USER')"/> <br/>
 
             <p>Report a new sickness:</p>
-            
-    
+
+
 
 
             <form action ="#" th:action="@{/sickness}" th:object="${sickness}" method = "POST">
-                <input type="text" name="symptoms" />
-                <input type="submit" value="Submit!" />
+                <table>
+                    <tr>
+                        <td>Name: </td>
+                        <td><input type="text" th:name="symptoms" required="required" /></td>
+                    </tr>
+                    <td><button type="submit" value="submit">Submit</button></td>
+         
+                </table>
             </form>
 
 

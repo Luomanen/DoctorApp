@@ -12,8 +12,8 @@ and open the template in the editor.
     </head>
     <body>
         <form action="#" th:action = "@{/login}" method = "POST">
-            <input type="text" name ="username" placeholder="username" autofocus="autofocus"/><br/>
-            <input type="password" name ="password" placeholder="password"/><br/>
+            <input type="text" name ="username" placeholder="username" autofocus="autofocus" required="required"/><br/>
+            <input type="password" name ="password" placeholder="password" required="required"/><br/>
             <input type="submit" value ="Submit"/>
         </form>
         

@@ -14,9 +14,9 @@ and open the template in the editor.
 
         <h1>Sign up as a patient:</h1>
         <form action="#" th:action = "@{/signup}" method = "POST">
-            <input type ="text" name ="name" placeholder="name" autofocus="autofocus"/><br/>
-            <input type="text" name ="username" placeholder="username" /><br/>
-            <input type="password" name ="password" placeholder="password"/><br/>
+            <input type ="text" name ="name" placeholder="name" autofocus="autofocus" required="required"/><br/>
+            <input type="text" name ="username" placeholder="username" required="required" /><br/>
+            <input type="password" name ="password" placeholder="password" required="required"/><br/>
             <input type="submit" value ="Submit"/>
         </form>
 
