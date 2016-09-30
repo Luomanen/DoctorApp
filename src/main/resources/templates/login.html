@@ -11,14 +11,18 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
+        <h2>Sign In:</h2>
         <form action="#" th:action = "@{/login}" method = "POST">
-            <input type="text" name ="username" placeholder="username" autofocus="autofocus" required="required"/><br/>
-            <input type="password" name ="password" placeholder="password" required="required"/><br/>
-            <input type="submit" value ="Submit"/>
+            <table><td>
+                <tr> <input type="text" name ="username" placeholder="username" autofocus="autofocus" required="required"/><br/></tr>
+                <tr>    <input type="password" name ="password" placeholder="password" required="required"/><br/></tr>
+                <tr>    <input type="submit" value ="Submit"/></tr>
+                </td>
+            </table>
         </form>
-        
+
         <br/>
         <a th:href ="@{/signup}">Click here to sign up!</a>
-        
+
     </body>
 </html>

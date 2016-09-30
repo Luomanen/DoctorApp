@@ -21,7 +21,6 @@ and open the template in the editor.
             <br/>
 
 
-            <span th:text="${user.ownDoctor.name}" sec:authorize="hasAuthority('USER')"/>
         </h3>
         <div sec:authorize="hasAuthority('USER')">Your personal doctor is: <span th:text="${user.ownDoctor.name}" sec:authorize="hasAuthority('USER')"/> <br/>
 

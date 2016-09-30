@@ -45,9 +45,9 @@ public class InitService {
         
         
         Doctor doctor = new Doctor();
-        doctor.setName("doc");
-        doctor.setPassword("doc");
-        doctor.setUsername("doc");
+        doctor.setName("Dr. Frankenstein");
+        doctor.setPassword("Doctor");
+        doctor.setUsername("Doctor");
 
         doctorRepository.save(doctor);
 
@@ -62,9 +62,9 @@ public class InitService {
         sicklist.add(sick);
        
         Patient patient = new Patient();
-        patient.setName("pat");
-        patient.setUsername("pat");
-        patient.setPassword("pat");
+        patient.setName("Patient");
+        patient.setUsername("Patient");
+        patient.setPassword("Patient");
         patient.setOwnDoctor(doctor);
         patient.setSickness(sicklist);
         

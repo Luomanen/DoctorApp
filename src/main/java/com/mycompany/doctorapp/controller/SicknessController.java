@@ -45,6 +45,8 @@ public class SicknessController {
     private TreatmentService treatmentService;
 
     @RequestMapping(value = "/sickness", method = RequestMethod.POST)
+    
+    //post a new sickness as a patient
     public String newSickness(@Valid @ModelAttribute("sicknes") Sickness sickness, BindingResult bindingresult) {
         if (bindingresult.hasErrors()) {
             return "redirect:/index";
@@ -53,6 +55,7 @@ public class SicknessController {
         return "redirect:/index";
     }
 
+    //show sickness page
     @RequestMapping(value = "/sickness/{id}", method = RequestMethod.GET)
     public String showSickness(@PathVariable Long id, Model model) {
 
@@ -62,11 +65,12 @@ public class SicknessController {
         return "sickness";
     }
 
+    
+    //doctors can order treatments to sicknesses
     @RequestMapping(value = "/sickness/{id}", method = RequestMethod.POST)
     public String orderTreatment(@Valid @ModelAttribute Treatment treatment, @PathVariable Long id, BindingResult bindingresult) {
 
         if (bindingresult.hasErrors()) {
-            System.out.println("toimii");
             return "sickness/" + id;
         }
         Sickness sickness = sicknessRepository.findOne(id);

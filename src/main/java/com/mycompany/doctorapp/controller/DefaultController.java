@@ -32,12 +32,7 @@ public class DefaultController {
         String username = auth.getName();
 
         Patient authpatient = patientRepository.findByUsername(username);
-        //debug
-        /*
-       
-        model.addAttribute("doctors",doctorRepository.findAll());
-        model.addAttribute("patients",patientRepository.findAll());
-         */
+      
 
         if (authpatient != null) { //if authenticated person is a patient
             model.addAttribute("sicknesses", authpatient.getSickness());
@@ -47,7 +42,6 @@ public class DefaultController {
         Doctor authdoctor = doctorRepository.findByUsername(username);
         if (authdoctor != null) { // if authenticated person is a doctor
             model.addAttribute("sicknesses", authdoctor.getTreatedSicknesses());
-            System.out.println(authdoctor.getTreatedSicknesses());
             model.addAttribute("user", authdoctor);
         }
 

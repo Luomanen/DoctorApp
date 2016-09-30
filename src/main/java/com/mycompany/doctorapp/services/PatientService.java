@@ -98,6 +98,7 @@ public class PatientService {
 
     }
 
+    
     public Doctor getRandomDoc() {
         List<Doctor> docs = doctorRepository.findAll();
         int rnd = new Random().nextInt(docs.size());
