@@ -15,8 +15,8 @@ import com.mycompany.doctorapp.services.TreatmentService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,14 +45,17 @@ public class SicknessController {
     private TreatmentService treatmentService;
 
     @RequestMapping(value = "/sickness", method = RequestMethod.POST)
-    public String newSickness(@ModelAttribute Sickness sickness) {
+    public String newSickness(@Valid @ModelAttribute Sickness sickness, BindingResult bindingresult) {
+        if (bindingresult.hasErrors()) {
+            return "redirect:/index";
+        }
         patientService.addSickness(sickness);
         return "redirect:/index";
     }
 
     @RequestMapping(value = "/sickness/{id}", method = RequestMethod.GET)
     public String showSickness(@PathVariable Long id, Model model) {
-        
+
         Sickness sickness = sicknessRepository.findOne(id);
         model.addAttribute("sickness", sickness);
 
@@ -60,11 +63,15 @@ public class SicknessController {
     }
 
     @RequestMapping(value = "/sickness/{id}", method = RequestMethod.POST)
-    public String orderTreatment(@Valid @ModelAttribute Treatment treatment, @PathVariable Long id) {
-        
+    public String orderTreatment(@Valid @ModelAttribute Treatment treatment, @PathVariable Long id, BindingResult bindingresult) {
+
+        if (bindingresult.hasErrors()) {
+            System.out.println("toimii");
+            return "sickness/" + id;
+        }
         Sickness sickness = sicknessRepository.findOne(id);
         treatmentService.treatSickness(treatment, sickness);
-        
+
         return "redirect:/index";
 
     }

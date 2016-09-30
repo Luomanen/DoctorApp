@@ -19,17 +19,19 @@ and open the template in the editor.
             <span th:text="${user.name}"></span>
             !
             <br/>
-            
+
 
             <span th:text="${user.ownDoctor.name}" sec:authorize="hasAuthority('USER')"/>
         </h3>
         <div sec:authorize="hasAuthority('USER')">Your personal doctor is: <span th:text="${user.ownDoctor.name}" sec:authorize="hasAuthority('USER')"/> <br/>
-           
+
             <p>Report a new sickness:</p>
+            
+    
 
 
-            <form th:action="@{/sickness}" method = "POST">
-                <input type="text" name="symptoms" placeholder="tell the symptoms"/>
+            <form action ="#" th:action="@{/sickness}" th:object="${sickness}" method = "POST">
+                <input type="text" name="symptoms" />
                 <input type="submit" value="Submit!" />
             </form>
 

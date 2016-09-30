@@ -37,9 +37,13 @@ public class InitService {
     @Autowired
     private SicknessRepository sicknessRepository;
 
+    
+    //create the first doctor and a test patient.
     @PostConstruct
     public void init() {
 
+        
+        
         Doctor doctor = new Doctor();
         doctor.setName("doc");
         doctor.setPassword("doc");
