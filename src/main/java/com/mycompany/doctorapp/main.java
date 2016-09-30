@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class DoctorApp {
+public class main {
 
     public static void main(String[] args) {
-        SpringApplication.run(DoctorApp.class, args);
+        SpringApplication.run(main.class, args);
     }
 }
